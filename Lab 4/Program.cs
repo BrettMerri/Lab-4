@@ -11,7 +11,7 @@ namespace Lab_4
         static void Main(string[] args)
         {
             bool loop = true;
-            while (loop)
+            while (loop) //App will loop until loop = false
             {
                 Console.Write("Please type in a number between 1 and 65: ");
 
@@ -30,7 +30,7 @@ namespace Lab_4
 
                 if (!continueApp()) //If user does not want to continue app, close app. Otherwise - restart app.
                 {
-                    return;
+                    loop = false;
                 }
             }
         }
@@ -74,11 +74,11 @@ namespace Lab_4
                 if (continueString == "y")
                 {
                     Console.WriteLine();
-                    return true;
+                    return true; //Continues application
                 }
                 else if (continueString == "n")
                 {
-                    return false;
+                    return false; //Ends application
                 }
                 else
                 {
