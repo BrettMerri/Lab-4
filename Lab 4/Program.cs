@@ -15,33 +15,40 @@ namespace Lab_4
             {
                 Console.Clear();
                 Console.Write("Please type in a number between 1 and 10: ");
+
                 string input = Console.ReadLine(); //Prompts user for integer input
-                int inputNumber = isValidInteger(input);
-                if (inputNumber == -1)
+
+                int inputNumber = isValidInteger(input); //Validates if input is an integer and its between 1 and 10
+                if (inputNumber == -1) //Restarts application if an error has occurred
                 {
                     continue;
                 }
-                int output = factorial(inputNumber);
-                Console.WriteLine("{0}! = {1}", inputNumber, factorial(inputNumber));
-                Console.ReadKey();
 
+                int output = factorial(inputNumber); //Calculates factorial with a for loop
+
+                Console.WriteLine("{0}! = {1}\n", inputNumber, factorial(inputNumber)); //Output: 3! = 6
+
+                if (!continueApp()) //If user does not want to continue app, close app
+                {
+                    return;
+                }
             }
         }
         public static int isValidInteger(string input)
         {
             int x;
-            if (!int.TryParse(input, out x)) //Validating user input to ensure it is an integer
+            if (!int.TryParse(input, out x)) //Validates if user input is an integer
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: Input not a number");
+                Console.WriteLine("Error: Input not a number"); //Prompts error if input is not a number
                 Console.ReadKey();
                 Console.ForegroundColor = ConsoleColor.Gray;
                 return -1;
             }
-            if (x < 1 || x > 10)
+            if (x < 1 || x > 10) //Validates if user input is between 1 and 10
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: Input not between 1 and 10");
+                Console.WriteLine("Error: Input not between 1 and 10"); //Prompts error if input is not between 1 and 10
                 Console.ReadKey();
                 Console.ForegroundColor = ConsoleColor.Gray;
                 return -1;
@@ -51,11 +58,36 @@ namespace Lab_4
         public static int factorial(int input)
         {
             int x = 1;
-            for (int i = 1; i <= input; i++)
+            for (int i = 1; i <= input; i++) //Calculates factorial with a for loop
             {
                 x = x * i;
             }
             return x;
+        }
+        public static bool continueApp()
+        {
+            while (true)
+            {
+                Console.Write("Continue? (y/n): "); //Prompts user if he wants to continue
+
+                string continueString = Console.ReadLine().ToLower();
+
+                if (continueString == "y")
+                {
+                    return true;
+                }
+                else if (continueString == "n")
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: Input not y or n."); //Prompts error if input is not Y or N
+                    Console.ReadKey();
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+            }
         }
     }
 }
