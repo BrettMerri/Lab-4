@@ -13,22 +13,22 @@ namespace Lab_4
             bool loop = true;
             while (loop)
             {
-                Console.Clear();
-                Console.Write("Please type in a number between 1 and 10: ");
+                Console.Write("Please type in a number between 1 and 65: ");
 
                 string input = Console.ReadLine(); //Prompts user for integer input
 
-                int inputNumber = isValidInteger(input); //Validates if input is an integer and its between 1 and 10
-                if (inputNumber == -1) //Restarts application if an error has occurred
+                int inputNumber = isValidInteger(input); //Validates if input is an integer and its between 1 and 65
+                if (inputNumber == 0) //Restarts application if an error has occurred
                 {
+                    Console.WriteLine();
                     continue;
                 }
 
-                int output = factorial(inputNumber); //Calculates factorial with a for loop
+                ulong output = factorial(Convert.ToUInt64(inputNumber)); //Calculates factorial with a for loop
 
-                Console.WriteLine("{0}! = {1}\n", inputNumber, factorial(inputNumber)); //Output: 3! = 6
+                Console.WriteLine("{0}! = {1}\n", inputNumber, output); //Output: 3! = 6
 
-                if (!continueApp()) //If user does not want to continue app, close app
+                if (!continueApp()) //If user does not want to continue app, close app. Otherwise - restart app.
                 {
                     return;
                 }
@@ -41,24 +41,23 @@ namespace Lab_4
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: Input not a number"); //Prompts error if input is not a number
-                Console.ReadKey();
                 Console.ForegroundColor = ConsoleColor.Gray;
-                return -1;
+                return 0;
             }
-            if (x < 1 || x > 10) //Validates if user input is between 1 and 10
+            if (x < 1 || x > 65) //Validates if user input is between 1 and 10
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: Input not between 1 and 10"); //Prompts error if input is not between 1 and 10
-                Console.ReadKey();
+                Console.WriteLine("Error: Input not between 1 and 65"); //Prompts error if input is not between 1 and 10
                 Console.ForegroundColor = ConsoleColor.Gray;
-                return -1;
+                return 0;
             }
             return x;
         }
-        public static int factorial(int input)
+        public static ulong factorial(ulong input)
         {
-            int x = 1;
-            for (int i = 1; i <= input; i++) //Calculates factorial with a for loop
+            ulong x = 1;
+
+            for (ulong i = 1; i <= input; i++) //Calculates factorial with a for loop
             {
                 x = x * i;
             }
@@ -74,6 +73,7 @@ namespace Lab_4
 
                 if (continueString == "y")
                 {
+                    Console.WriteLine();
                     return true;
                 }
                 else if (continueString == "n")
@@ -84,8 +84,8 @@ namespace Lab_4
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Error: Input not y or n."); //Prompts error if input is not Y or N
-                    Console.ReadKey();
                     Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine();
                 }
             }
         }
